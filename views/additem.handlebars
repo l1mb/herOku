@@ -17,7 +17,7 @@
         </div>
         <div>
             <button onclick="confirm()">Confirm</button>
-            <button>Cancel</button>
+            <button onclick="cancer()">{{cancelButtonName}}</button>
         </div>
     </div>
     <script>
@@ -29,10 +29,15 @@
                     "Content-Type": "application/json"
                 }, 
                 body: JSON.stringify({
-                    name: data[0],
-                    company: data[1]
+                    name: data[0].value,
+                    company: data[1].value
                 })
             }).then(res=> window.location.href = '/')
+
+
+        }
+        function cancer(){
+            window.location.href="/"
         }
     </script>
 </body>

@@ -3,6 +3,12 @@ import {engine} from "express-handlebars"
 import fs from "fs"
 import path from "path"
 import bodyParser from "body-parser"
+import hbs from "handlebars"
+
+hbs.registerHelper('cancelButtonName', () => {
+    return "Cancel button";
+});
+
 
 const app = express();
 
