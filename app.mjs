@@ -31,8 +31,4 @@ app.get('/add', (req, res) => {
     })
 })
 
-app.listen(process.env.PORT || app.get('port'), "localhost", ()=> {
-    console.log(
-        "server started on localhost:" + `${process.env.PORT || app.get('port')}`
-    )
-});
+app.listen(process.env.PORT || app.get('port'));
