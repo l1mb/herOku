@@ -15,6 +15,25 @@
             <input type="text" placeholder="name">
             <input type="text" placeholder="company">
         </div>
+        <div>
+            <button onclick="confirm()">Confirm</button>
+            <button>Cancel</button>
+        </div>
     </div>
+    <script>
+        function confirm(){
+            const data = document.getElementsByTagName('input');
+            fetch('./add', {
+                method:"POST",
+                headers:{ 
+                    "Content-Type": "application/json"
+                }, 
+                body: JSON.stringify({
+                    name: data[0],
+                    company: data[1]
+                })
+            }).then(res=> window.location.href = '/')
+        }
+    </script>
 </body>
 </html>
