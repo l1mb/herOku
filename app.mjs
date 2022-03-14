@@ -34,8 +34,18 @@ const getPrikolHandler = (req, res)=> {
 app.use("/styles", express.static(`${__dirname}/views/styles`));
 app.get('/', getPrikolHandler);
 app.get('/add', (req, res) => {
-    res.render('additem', {
+    res.render('addItem', {
         data: getDataFromJson()
+    })
+})
+
+app.get('/update/:id', (req, res) => {
+    console.log(req.params.id);
+    const q = getDataFromJson().find(el=> el._id ===req.params.id);
+    console.log(q);
+    res.render(`updateItem`, {
+        data:getDataFromJson(),
+        editItem:q
     })
 })
 app.post('/add', (req, res)=> {
@@ -47,6 +57,19 @@ app.post('/add', (req, res)=> {
     updateDataFromJson(prevData);
     res.status(201)
     res.end("Send us to destruy")
+})
+
+app.delete('/delete', (req, res) => {
+    console.log("prikol");
+    const data = req.body;
+    let prevData = getDataFromJson();
+    console.log(prevData.map(el=> el._id));
+    prevData = prevData.filter(el => el._id !== data.id);
+    console.log(prevData.map(el=> el._id));
+
+    updateDataFromJson(prevData);
+    res.status(204);
+    res.end("deleted"); 
 })
 
 

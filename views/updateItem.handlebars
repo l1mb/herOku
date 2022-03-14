@@ -12,12 +12,14 @@
     <div class="items-wrapper">
         {{>itemsContainer}}
         <div class="input-container">
-            <input type="text" placeholder="name">
-            <input type="text" placeholder="company">
+            <input type="text" placeholder="name" value="{{editItem.name}}">
+            <input type="text" placeholder="company" value="{{editItem.name}}">
         </div>
         <div>
             <button onclick="confirm()">Confirm</button>
+            <button onclick="deleteItem()">Delete item</button>
             <button onclick="cancer()">{{cancelButtonName}}</button>
+
         </div>
     </div>
     <script>
@@ -38,6 +40,17 @@
         }
         function cancer(){
             window.location.href="/"
+        }
+        function deleteItem(){
+            fetch('/delete', {
+                method:"DELETE",
+                headers:{ 
+                    "Content-Type": "application/json"
+                }, 
+                body: JSON.stringify({
+                    id:`{{editItem._id}}`
+                }),
+            }).then(res=> window.location.href = '/')
         }
     </script>
 </body>
