@@ -13,7 +13,7 @@
         {{>itemsContainer}}
         <div class="input-container">
             <input type="text" placeholder="name">
-            <input type="text" placeholder="company">
+            <input type="text" placeholder="Phonk">
         </div>
         <div>
             <button onclick="confirm()">Confirm</button>
@@ -30,7 +30,7 @@
                 }, 
                 body: JSON.stringify({
                     name: data[0].value,
-                    company: data[1].value
+                    phonk: data[1].value
                 })
             }).then(res=> window.location.href = '/')
 

@@ -12,12 +12,12 @@
     <div class="items-wrapper">
         {{>itemsContainer}}
         <div class="input-container">
-            <input type="text" placeholder="name" value="{{editItem.name}}">
-            <input type="text" placeholder="company" value="{{editItem.name}}">
+            <input id="nameInput" type="text" placeholder="name" value="{{editItem.name}}">
+            <input id="phonkInput" type="text" placeholder="phonk" value="{{editItem.phonk}}">
         </div>
         <div>
             <button onclick="confirm()">Confirm</button>
-            <button onclick="deleteItem()">Delete item</button>
+            <button id="deleteButton" onclick="deleteItem()">Delete item</button>
             <button onclick="cancer()">{{cancelButtonName}}</button>
 
         </div>
@@ -25,14 +25,15 @@
     <script>
         function confirm(){
             const data = document.getElementsByTagName('input');
-            fetch('./add', {
+            fetch('/update', {
                 method:"POST",
                 headers:{ 
                     "Content-Type": "application/json"
                 }, 
                 body: JSON.stringify({
                     name: data[0].value,
-                    company: data[1].value
+                    phonk: data[1].value,
+                    id: `{{editItem.id}}`
                 })
             }).then(res=> window.location.href = '/')
 
@@ -43,15 +44,26 @@
         }
         function deleteItem(){
             fetch('/delete', {
-                method:"DELETE",
+                method:"post",
                 headers:{ 
                     "Content-Type": "application/json"
                 }, 
                 body: JSON.stringify({
-                    id:`{{editItem._id}}`
+                    id:`{{editItem.id}}`
                 }),
             }).then(res=> window.location.href = '/')
         }
+
+    const disableButton = () => {
+        document.getElementById('deleteButton').disabled = true;
+    }
+    document.addEventListener("DOMContentLoaded", () => {
+        document.querySelector('#nameInput').addEventListener('keydown', disableButton);
+        
+        document.querySelector('#phonkInput').addEventListener('keydown', disableButton);
+        
+    })
+    
     </script>
 </body>
 </html>
