@@ -9,7 +9,7 @@ import csp from 'express-csp-header';
 const __dirname = path.dirname('./');
 const app = express();
 
-app.use(csp({
+app.use(csp.expressCspHeader({
     policies: {
         'default-src': [csp.NONE],
         'img-src': [csp.SELF],
