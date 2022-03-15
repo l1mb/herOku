@@ -21,7 +21,8 @@
             <button onclick="cancer()">{{cancelButtonName}}</button>
         </div>
     </div>
-    <script>
+</body>
+<script>
         function confirm(){
             const data = document.getElementsByTagName('input');
             fetch('/add', {
@@ -40,6 +41,5 @@
         function cancer(){
             window.location.href="/"
         }
-    </script>
-</body>
+</script>
 </html>
