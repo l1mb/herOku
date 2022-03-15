@@ -12,9 +12,14 @@
     {{>header}}
     <div class="items-wrapper">
         {{>itemsContainer}}
-        <div class="input-container">
-            <input id="nameInput" type="text" placeholder="name" value="{{editItem.name}}">
-            <span>+<input id="phonkInput" type="number" maxlength="12" placeholder="phonk" value="{{editItem.phonk}}"></span>
+       <div class="input-container">
+            <input class="norm" id="name" type="text" placeholder="name">
+            <div class="second-input" id="phonkInput" >
+                <input  placeholder="phonk" value="{{editItem.phonk}}">
+                <span class="error-caption">
+                    wrong format
+                </span>
+            </div>
         </div>
         <div>
             <button onclick="confirm()">Confirm</button>
