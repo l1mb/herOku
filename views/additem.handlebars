@@ -13,17 +13,54 @@
     <div class="items-wrapper">
         {{>itemsContainer}}
         <div class="input-container">
-            <input type="text" placeholder="name">
-            <span>+<input id="phonkInput" type="number" maxlength="12" placeholder="phonk" value="{{editItem.phonk}}"></span>
+            <input class="norm" id="name" type="text" placeholder="name">
+            <div class="second-input" id="phonkInput" >
+                <input  placeholder="phonk" value="{{editItem.phonk}}">
+                <span class="error-caption">
+                    wrong format
+                </span>
+            </div>
         </div>
         <div>
-            <button onclick="confirm()">Confirm</button>
+            <button id="confirmButton" onclick="confirm()">Confirm</button>
             <button onclick="cancer()">{{cancelButtonName}}</button>
         </div>
     </div>
     <script>
         function confirm(){
+            handleAdd();
+        }
+        function cancer(){
+            window.location.href="/"
+        }
+
+        
+        const handleAdd = () => { 
             const data = document.getElementsByTagName('input');
+            let errors = [];
+            const name = document.querySelector("#name");
+            const phonkInput = document.querySelector("#phonkInput"); 
+            console.log(data[1].value.match(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/));
+            if (!name.value){
+                errors.push(true);
+                name.className += ' error';
+            }
+            else {
+                errors.pop();
+                name.className = 'input';
+            }
+            if (!data[1].value ||
+            !data[1].value.match(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/)){
+                errors.push(true);
+                
+                phonkInput.className += ' invalid_input'; 
+            } else {
+                error = [];
+                phonkInput.className = 'second-input'; 
+            } 
+            if (errors.length !== 0){ 
+                return; 
+                }
             fetch('/add', {
                 method:"POST",
                 headers:{ 
@@ -35,11 +72,7 @@
                 })
             }).then(res=> window.location.href = '/')
 
-
-        }
-        function cancer(){
-            window.location.href="/"
-        }
+        } 
     </script>
 </body>
 </html>

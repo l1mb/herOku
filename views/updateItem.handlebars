@@ -55,8 +55,20 @@
             }).then(res=> window.location.href = '/')
         }
 
-    const disableButton = () => {
-        document.getElementById('deleteButton').disabled = true;
+    const disableButton = (event) => {
+        const secInput = document.getElementsByTagName('input')[1];
+        if(!secInput.value | !secInput.value.match(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/))
+        {
+            const deletebutton = document.getElementById('deleteButton');
+            deletebutton.disabled = true;
+            deletebutton.classList="disabled";
+        }
+        else{
+            const deletebutton = document.getElementById('deleteButton');
+            deletebutton.disabled = false;
+            deletebutton.classList="";
+        }
+
     }
     document.addEventListener("DOMContentLoaded", () => {
         document.querySelector('#nameInput').addEventListener('keydown', disableButton);

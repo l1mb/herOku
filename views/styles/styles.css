@@ -90,7 +90,35 @@ header > h2{
     padding: 6px 8px;
     border-radius: 4px;
     border: 1px solid #2d2d2d;
-    
     flex:0 40%;
+}
 
+.invalid_input{
+    border: 2px solid brown !important;
+}
+
+.error-caption{
+    opacity: 0;
+    transition: all 0.5s;
+    font-size: 12px;
+    color:red;
+    position: absolute;
+    top:30px;
+    left: 5px;
+}
+
+.invalid_input > .error-caption{
+    opacity: 1;
+}
+.invalid_input > input{
+    border: none;
+}
+
+.second-input{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+}
+.disabled{
+    opacity: 0.5;
 }
