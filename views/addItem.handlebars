@@ -43,7 +43,7 @@
             console.log(data[1].value.match(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/));
             if (!name.value){
                 errors.push(true);
-                name.className += ' error';
+                name.className += ' invalid_input';
             }
             else {
                 errors.pop();
