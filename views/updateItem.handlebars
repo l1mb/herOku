@@ -12,15 +12,15 @@
     {{>header}}
     <div class="items-wrapper">
         {{>itemsContainer}}
-       <div class="input-container">
-            <input class="norm" id="name" type="text" placeholder="name">
-            <div class="second-input" id="phonkInput" >
-                <input  placeholder="phonk" value="{{editItem.phonk}}">
-                <span class="error-caption">
+        <div class="input-container">
+            <input class="norm" id="nameInput" type="text" placeholder="name" value="{{editItem.name}}">
+             <div class="second-input" id="phonkInput" ></div>
+                <input id="phonkInput" type="text" maxlength="12" placeholder="phonk" value="{{editItem.phonk}}">
+                  <span class="error-caption">
                     wrong format
                 </span>
             </div>
-        </div>
+
         <div>
             <button onclick="confirm()">Confirm</button>
             <button id="deleteButton" onclick="deleteItem()">Delete item</button>
@@ -30,7 +30,31 @@
     </div>
     <script>
         function confirm(){
+            
+            const name = document.querySelector("#nameInput");
             const data = document.getElementsByTagName('input');
+            const phonkInput = data[1];
+            let errors = [];
+            if (!name.value){
+                errors.push(true);
+                name.className += ' invalid_input';
+            }
+            else {
+                errors = [];
+                name.className = 'input';
+            }
+            if (!data[1].value ||
+            !data[1].value.match(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/)){
+                errors.push(true);
+                
+                phonkInput.className += ' invalid_input'; 
+            } else {
+                error = [];
+                phonkInput.className = 'second-input'; 
+            } 
+            if(errors.length>0){
+                return;
+            }
             fetch('/update', {
                 method:"POST",
                 headers:{ 
@@ -41,9 +65,7 @@
                     phonk: data[1].value,
                     id: `{{editItem.id}}`
                 })
-            }).then(res=> window.location.href = '/')
-
-
+            }).then(res=> window.location.href = '/');
         }
         function cancer(){
             window.location.href="/"
